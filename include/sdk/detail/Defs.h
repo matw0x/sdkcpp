@@ -2,6 +2,6 @@
 
 namespace sdk::detail {
 
-#define SDK_API [[nodiscard]]
+#define API [[nodiscard]]
 
 }  // namespace sdk::detail

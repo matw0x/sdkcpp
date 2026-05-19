@@ -1,10 +1,10 @@
-include(_CPM.cmake)
+include(_CPM)
 
 add_library(sdk_dependencies INTERFACE)
 
-include(concurrentqueue.cmake)
-target_link_libraries(sdk_dependencies INTERFACE moodycamel::concurrentqueue)
+include(concurrentqueue)
+target_link_libraries(sdk_dependencies INTERFACE concurrentqueue)
 
 # other deps
-# include(lib.cmake)
+# include(lib)
 # target_link_libraries(sdk_dependencies INTERFACE x::y)

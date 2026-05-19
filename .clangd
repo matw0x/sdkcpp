@@ -1,23 +1,8 @@
 CompileFlags:
-  Remove: 
-    - "*cmake_pch.hxx*"
-    - "*cmake_pch.h*"
-    - "-Xclang"
-    - "-include-pch"
-    - "-O*"
+  CompilationDatabase: build/
 
   Add: 
-    - -Wno-unknown-warning-option
     - -std=c++2b
-    - -fno-builtin
-    - -fexperimental-library
-    - -O0
-
-Diagnostics:
-  ClangTidy:
-    Remove: "*"
-  Includes:
-    IgnoreHeader: ".*"
   
 Index:
   Background: Build
