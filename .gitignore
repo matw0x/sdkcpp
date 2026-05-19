@@ -1,0 +1,12 @@
+*.exe
+*.out
+*.o
+.txt
+build*
+/build*
+./build*
+.env
+*.env
+compile_commands.json
+.cache
+.vscode
