@@ -5,29 +5,42 @@
 #include "detail/Defs.h"
 #include "detail/Meta.h"
 
-namespace sdk {
+namespace sdk::router {
 
-struct SyncPolicy;
+enum class Policy {
+    sync,
+    async,
+};
 
-struct AsyncPolicy;
+struct BaseConfig {
+    static constexpr auto policy = Policy::sync;
+    static constexpr auto size   = 256u;
+};
 
-template <typename P>
-concept SyncRouterPolicy = std::is_same_v<P, SyncPolicy>;
+template <typename C>
+concept RouterConfig = std::is_base_of_v<BaseConfig, C> and requires(const C &config) { typename C::Routes; };
 
-template <typename P>
-concept AsyncRouterPolicy = std::is_same_v<P, AsyncPolicy>;
+template <typename Event, typename WhatDo>
+struct Route final {
+    using Trigger   = Event;
+    using Processor = WhatDo;
+};
 
-template <typename P>
-concept RouterPolicy = detail::IsAnyOf<P, SyncPolicy, AsyncPolicy>;
+template <typename... Rs>
+struct Routes final {
+    using AsTuple              = std::tuple<Rs...>;
+    static constexpr auto size = sizeof...(Rs);
+};
 
-template <RouterPolicy Policy>
+template <RouterConfig Config>
 class Router final {
    public:
-    API auto route() {}
+    template <typename Event>
+    API auto send(const Event &event) {}
 
    private:
     using Placeholder = uint32_t;
-    moodycamel::ConcurrentQueue<Placeholder> events;
+    moodycamel::ConcurrentQueue<Placeholder> events;  // maybe make QueueType like template?
 };
 
-}  // namespace sdk
+}  // namespace sdk::router
