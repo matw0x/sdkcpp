@@ -22,7 +22,7 @@ struct Locator<Pack<Services...>, Context> {
 
    protected:
     template <typename Service>
-    API auto& get(this auto& self) noexcept {
+    SDK_API auto& get(this auto& self) noexcept {
         auto& hub     = static_cast<Hub&>(self);
         auto& service = static_cast<Service&>(hub);
 
@@ -30,7 +30,7 @@ struct Locator<Pack<Services...>, Context> {
     }
 
     template <typename Service>
-    API const auto& get(this const auto& self) noexcept {
+    SDK_API const auto& get(this const auto& self) noexcept {
         const auto& hub     = static_cast<const Hub&>(self);
         const auto& service = static_cast<const Service&>(hub);
 

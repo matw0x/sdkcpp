@@ -36,7 +36,7 @@ template <RouterConfig Config>
 class Router final {
    public:
     template <typename Event>
-    API auto send(const Event &event) {}
+    SDK_API auto send(const Event &event) {}
 
    private:
     using Placeholder = uint32_t;
